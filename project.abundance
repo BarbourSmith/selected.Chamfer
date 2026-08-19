@@ -6,7 +6,7 @@
   "name": "selected.Chamfer",
   "ioValues": [
     {
-      "name": "Input",
+      "name": "Geometry",
       "ioValue": "__GEOMETRY_INPUT__"
     },
     {
@@ -30,8 +30,8 @@
     },
     {
       "atomType": "Code",
-      "x": 0.4021164021164021,
-      "y": 0.520891364902507,
+      "x": 0.40939153439153436,
+      "y": 0.44846796657381616,
       "uniqueID": "id-22910",
       "ioValues": [
         {
@@ -52,6 +52,7 @@
       "x": 0.025384615384615384,
       "y": 0.36211699164345407,
       "uniqueID": "id-22921",
+      "name": "Geometry",
       "type": "edgeselect",
       "selectedEdgeData": {}
     },
