@@ -1,13 +1,86 @@
 {
-    "atomType": "Molecule",
-    "x": 0,
-    "y": 0,
-    "uniqueID": "id-22907",
-    "name": "selected.Chamfer",
-    "topLevel": true,
-    "allAtoms": [],
-    "allConnectors": [],
-    "unitsKey": "MM",
-    "fileTypeVersion": 1,
-    "filetypeVersion": 1
+  "atomType": "Molecule",
+  "x": 0,
+  "y": 0,
+  "uniqueID": "id-22907",
+  "name": "selected.Chamfer",
+  "ioValues": [
+    {
+      "name": "Input",
+      "ioValue": "__GEOMETRY_INPUT__"
+    },
+    {
+      "name": "Dist",
+      "ioValue": 10
+    }
+  ],
+  "topLevel": true,
+  "allAtoms": [
+    {
+      "atomType": "Output",
+      "x": 0.98,
+      "y": 0.5,
+      "uniqueID": "id-22908",
+      "ioValues": [
+        {
+          "name": "number or geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
+    },
+    {
+      "atomType": "Code",
+      "x": 0.4021164021164021,
+      "y": 0.520891364902507,
+      "uniqueID": "id-22910",
+      "ioValues": [
+        {
+          "name": "toChamfer",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "distance",
+          "ioValue": 10
+        }
+      ],
+      "interpreterVersion": 1,
+      "code": "function run(toChamfer: Assembly, distance: number) {\n  return toChamfer.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing || !replicad.isShape3D(leaf.geometry)) {\n      return leaf;\n    }\n    if (leaf.selection?.part) {\n      leaf.geometry = leaf.geometry.chamfer(distance)\n      return leaf;\n    }\n    // else apply only to filtered faces and edges\n    let edgesToChamfer: replicad.Edge[] = []\n    if (leaf.selection?.faces) {\n      leaf.selection.faces.forEach((faceIndex) => {\n        edgesToChamfer.push(...leaf.geometry.faces[faceIndex].edges)\n      });\n    }\n    if (leaf.selection?.edges) {\n      edgesToChamfer.push(...leaf.selection.edges.map((index) => leaf.geometry.edges[index]))\n    }\n    if (edgesToChamfer.length == 0) {\n      return leaf;\n    }\n    edgesToChamfer = edgesToChamfer.filter((e) => e != null)\n    if (edgesToChamfer.length == 0) {\n      return leaf;\n    }\n    leaf.geometry = leaf.geometry.chamfer(distance, (e) => { return e.inList(edgesToChamfer.map((e) => e.clone())) })\n    return leaf;\n  })\n}",
+      "compiledCode": "\"use strict\";\nfunction run(toChamfer, distance) {\n    return toChamfer.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing || !replicad.isShape3D(leaf.geometry)) {\n            return leaf;\n        }\n        if (leaf.selection?.part) {\n            leaf.geometry = leaf.geometry.chamfer(distance);\n            return leaf;\n        }\n        // else apply only to filtered faces and edges\n        let edgesToChamfer = [];\n        if (leaf.selection?.faces) {\n            leaf.selection.faces.forEach((faceIndex) => {\n                edgesToChamfer.push(...leaf.geometry.faces[faceIndex].edges);\n            });\n        }\n        if (leaf.selection?.edges) {\n            edgesToChamfer.push(...leaf.selection.edges.map((index) => leaf.geometry.edges[index]));\n        }\n        if (edgesToChamfer.length == 0) {\n            return leaf;\n        }\n        edgesToChamfer = edgesToChamfer.filter((e) => e != null);\n        if (edgesToChamfer.length == 0) {\n            return leaf;\n        }\n        leaf.geometry = leaf.geometry.chamfer(distance, (e) => { return e.inList(edgesToChamfer.map((e) => e.clone())); });\n        return leaf;\n    });\n}\n"
+    },
+    {
+      "atomType": "Input",
+      "x": 0.025384615384615384,
+      "y": 0.36211699164345407,
+      "uniqueID": "id-22921",
+      "type": "edgeselect",
+      "selectedEdgeData": {}
+    },
+    {
+      "atomType": "Input",
+      "x": 0.025384615384615384,
+      "y": 0.6768802228412256,
+      "uniqueID": "id-22924",
+      "name": "Dist"
+    }
+  ],
+  "allConnectors": [
+    {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-22910",
+      "ap2ID": "id-22908"
+    },
+    {
+      "ap2Name": "toChamfer",
+      "ap1ID": "id-22921",
+      "ap2ID": "id-22910"
+    },
+    {
+      "ap2Name": "distance",
+      "ap1ID": "id-22924",
+      "ap2ID": "id-22910"
+    }
+  ],
+  "unitsKey": "MM",
+  "fileTypeVersion": 1,
+  "filetypeVersion": 1
 }
