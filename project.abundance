@@ -11,7 +11,7 @@
     },
     {
       "name": "Dist",
-      "ioValue": 10
+      "ioValue": 1
     }
   ],
   "topLevel": true,
@@ -40,7 +40,7 @@
         },
         {
           "name": "distance",
-          "ioValue": 10
+          "ioValue": 1
         }
       ],
       "interpreterVersion": 1,
@@ -59,7 +59,7 @@
     {
       "atomType": "Input",
       "x": 0.025384615384615384,
-      "y": 0.6768802228412256,
+      "y": 0.6740947075208913,
       "uniqueID": "id-22924",
       "name": "Dist"
     }
