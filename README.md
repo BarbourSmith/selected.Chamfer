@@ -6,7 +6,7 @@
 
 ## Inputs
 
-- **Input** (geometry)
+- **Geometry** (geometry)
 - **Dist** (number)
 
 
